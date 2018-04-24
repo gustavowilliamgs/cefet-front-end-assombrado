@@ -9,10 +9,18 @@ Você deve fazer algumas partes que faltam do blog assombrado.
 ![O resultado final da prática](resultado.jpg)
 
 
+## Exercício 0: encurtar a duração do vídeo
+
+Abra a página no navegador. Assista uma vinheta bem legal. Faça isso duas vezes,
+e tudo ainda estará bem. A partir da terceira, aguardar os 11s do vídeo
+terminar passa a ser a pior coisa do mundo.
+
+Portanto, veja no [FAQ](#faq) como fazer o vídeo desaparecer mais rapidamente.
+
 ## Exercício 1: _tags_ semânticas
 
 Converta as `<div>` e `<span>` nas _tags_ semânticas mais adequadas,
-**se houver**
+**se houver**.
 
 - **Pode ser que não exista uma _tag_ semântica** em alguns casos - aí
   continua sendo `<div>` ou `<span>` mesmo
@@ -44,14 +52,17 @@ Usando pseudo-elementos _again_ ([slides][pseudo-coisas]),
 estilize as seleções - no cabeçalho, no rodapé e em
 `#tags` - de forma que elas fiquem bem visíveis.
 
+Se parecer não estar funcionado, veja a discussão no terceiro tópico
+do [FAQ](#faq).
+
 ## FAQ
 
-1. Toda hora tenho que assistir o vídeo?? Sacanagem, né?!
+1. **Toda hora tenho que assistir** o vídeo?? Sacanagem, né?!
    - No arquivo `index.html`, ao final do `<body>...</body>` há um pequeno
      código JavaScript que faz o vídeo sumir e o conteúdo principal aparecer
-   - Altere o tempo (de 11s) para algo menor
-1. Mudei umas _tags_ de `<div>` para semântica e, de repente, o conteúdo
-   principal da página sumiu. Por quê?
+   - Altere o tempo (de 11s) para algo menor (eg, de **11000 para 1100**)
+1. Mudei umas _tags_ de `<div>` para semântica e, de repente, **o conteúdo
+   principal da página sumiu**. Por quê?
    - Isso aconteceu por causa do pequeno código JavaScript que tem ao final
      `<body>`.
    - Veja algumas linhas do arquivo `index.html`:
@@ -60,10 +71,10 @@ estilize as seleções - no cabeçalho, no rodapé e em
        // faz o vídeo desaparecer de leve assim que terminar
        let tempo = 11000;  // 11s, duração do vídeo
        setTimeout(() => {
-         // linha A:
-         document.getElementsByClassName('backdrop')[0].classList.add('desaparecido')
-         // linha B:
-         document.getElementById('conteudo-principal').classList.remove('desaparecido')
+           // LINHA A: faz o vídeo desaparecer colocando a classe .desaparecido
+           document.querySelector('.backdrop').classList.add('desaparecido');
+           // LINHA B: faz o conteúdo principal surgir, retirando a classe .desaparecido
+           document.querySelector('#conteudo-principal').classList.remove('desaparecido');
        }, tempo);
      </script>
      ```
@@ -75,10 +86,33 @@ estilize as seleções - no cabeçalho, no rodapé e em
          o `id="conteudo-principal"` a partir do nome de sua _tag_
          - Para isso, você pode usar o comando em JavaScript:
            ```js
-           // linha B
-           document.getElementsByTagName('COLOQUE_A_TAG_AQUI')[0].classList.remove('desaparecido');
+           // LINHA B
+           document.querySelector('NOME_DA_TAG').classList.remove('desaparecido');
            ```
-
+1. O pseudo-elemento relativo à seleção de texto é o `::selection` e é
+   tipicamente usado pra alterar a cor do texto e do fundo da seleção.
+   - A regra a seguir se aplica a todo o texto que está **diretamente**
+     em um parágrafo:
+     ```css
+     p::selection {
+       /* declarações aqui */
+     }
+     ```
+     - Se houver um `<span>texto</span>` dentro desse parágrafo, a seleção
+       dentro do `<span>` não ficará com a cor diferente!
+   - A solução completa, para estilizar a seleção de tudo o que
+     estiver dentro de alguma coisa (por exemplo, de um parágrafo), deve
+     ser assim:
+     ```css
+     p::selection,
+     p ::selection {
+       /* declarações aqui */
+     }
+     ```
+     - Dessa forma, seleciona-se o pseudo-elemento da seleção do texto que
+       for exatamente filho do parágrafo, mas também da seleção de texto dentro
+       de qualquer um de seus descendentes (por exemplo, o texto dentro de um
+       `<span>` que está dentro de um `<p>`)
 
 [tags-semanticas]: https://fegemo.github.io/cefet-front-end/classes/html5/#elementos-semanticos
 [lista-horizontal]: https://fegemo.github.io/cefet-front-end/classes/html5/#elementos-semanticos
