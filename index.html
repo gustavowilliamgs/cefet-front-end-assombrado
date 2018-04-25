@@ -22,6 +22,10 @@
         </ul>
       </div>
     </div>
+
+    <!-- não remova a class="desaparecido" porque ela está sendo usada pra
+         esconder este elemento até o vídeo acabar (tem uma regra CSS para
+         ocultar quem tem .desaparecido)-->
     <div id="conteudo-principal" class="desaparecido">
       <section id="tags">
         <h1>Nuvem de <em>tags</em></h1>
@@ -56,6 +60,9 @@
 
       <div id="ultimas-postagens">
         <h1>Últimas Postagens</h1>
+        <!-- class="palavra1 palavra2" quer dizer que o elemento possui DUAS
+             CLASSES. Portanto, uma regra CSS .palavra1 seleciona ele, bem
+             como uma .palavra2 -->
         <div class="post novidade">
           <span class="time" datetime="2017-05-09">09/05/2017</span>
           <h2 class="titulo">
@@ -100,10 +107,14 @@
       </p>
     </div>
 
+    <!-- não remova a class="backdrop" porque ela está sendo usada para
+         estilizar este elemento no CSS e usada também no JavaScript para ocultar
+         o vídeo depois que ele acaba -->
     <div id="lateral" class="backdrop">
-      <video src="videos/vinheta.mp4" autoplay>
+      <video src="videos/vinheta.mp4" autoplay muted>
       </video>
     </div>
+    <button id="unmute">🔉</button>
 
     <script>
       // faz o vídeo desaparecer de leve assim que terminar
@@ -114,6 +125,13 @@
         // faz o conteúdo principal surgir, retirando a classe .desaparecido
         document.querySelector('#conteudo-principal').classList.remove('desaparecido');
       }, tempo);
+
+
+      // no clique do botão #unmute, tira o atributo muted to video
+      document.querySelector('#unmute').addEventListener('click', (e) => {
+        document.querySelector('.backdrop video').muted = false;
+        e.currentTarget.classList.add('desaparecido');
+      });
     </script>
   </body>
 </html>
