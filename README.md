@@ -26,6 +26,14 @@ Converta as `<div>` e `<span>` nas _tags_ semânticas mais adequadas,
   continua sendo `<div>` ou `<span>` mesmo
 - Veja as [_tags_ semânticas nos slides][tags-semanticas]
 
+**Atenção**: ao alterar o HTML (mudar uma tag para outra, mudar ou tirar
+uma `class` ou um `id`), deve-se verificar se são necessárias alterações nos
+arquivos CSS e em códigos JavaScript.
+
+Por exemplo, se você tirar o `id` da `<div id="header">...</div>`,
+faça uma busca por `#header` no arquivo CSS para verificar se precisa alterá-lo
+de forma que os estilos continuem se aplicando mesmo depois da alteração.
+
 ## Exercício 2: menu horizontal
 
 Torne horizontal a lista com o menu principal. Faça de forma que o menu
@@ -42,15 +50,15 @@ postagem que possui a classe `.novidade` tenha o texto "Novidade!"
 imediatamente antes do seu conteúdo (como na imagem lá em cima). Use
 sua criatividade para estilizar de uma forma bonita e legal.
 
-## Exercício 3: seleção de texto
+## Exercício 4: seleção de texto
 
-Repare que, ao selecionar o texto que está no cabeçalho ou
-no rodapé, não dá pra enxergar direito que parte
-está selecionada, porque o fundo desses caras é escuro.
+Ao selecionar o texto em uma página, o navegador escolhe uma cor de fundo e
+para o texto para mostrar o que foi selecionado.
 
-Usando pseudo-elementos _again_ ([slides][pseudo-coisas]),
-estilize as seleções - no cabeçalho, no rodapé e em
-`#tags` - de forma que elas fiquem bem visíveis.
+Usando pseudo-elementos novamente ([slides][pseudo-coisas]),
+estilize as seleções de texto que ocorrerem (a) dentro do cabeçalho,
+(b) dentro do rodapé e dentro de `#tags` - de alguma forma que elas
+fiquem diferentes do texto selecionado no "miolo" da página.
 
 Se parecer não estar funcionado, veja a discussão no terceiro tópico
 do [FAQ](#faq).
@@ -76,6 +84,7 @@ do [FAQ](#faq).
            // LINHA B: faz o conteúdo principal surgir, retirando a classe .desaparecido
            document.querySelector('#conteudo-principal').classList.remove('desaparecido');
        }, tempo);
+       // ...
      </script>
      ```
      - A "linha B" vai dar erro se não existir um elemento na página com um
@@ -95,7 +104,7 @@ do [FAQ](#faq).
      em um parágrafo:
      ```css
      p::selection {
-       /* declarações aqui */
+       /* muda cor e cor de fundo aqui */
      }
      ```
      - Se houver um `<span>texto</span>` dentro desse parágrafo, a seleção
@@ -106,7 +115,7 @@ do [FAQ](#faq).
      ```css
      p::selection,
      p ::selection {
-       /* declarações aqui */
+       /* muda cor e cor de fundo aqui */
      }
      ```
      - Dessa forma, seleciona-se o pseudo-elemento da seleção do texto que
