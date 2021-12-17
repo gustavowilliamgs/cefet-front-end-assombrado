@@ -1,6 +1,9 @@
 # Blog Assombrado
 
-Um blog sobre o desconhecido.
+Um blog sobre o desconhecido. Baixe o [código seminal][seminal].
+
+[seminal]: https://github.com/fegemo/cefet-front-end-assombrado/archive/main.zip
+
 
 ## Atividade
 
