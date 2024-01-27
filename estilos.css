@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-image: url(imgs/fundo-assombrado.jpg);
     background-size: cover;
@@ -11,14 +15,6 @@ header {
     box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.25);
     padding-top: 1em;
     text-align: center;
-}
-
-nav ul {
-    display: flex;
-    gap: 50px;
-    list-style: none;
-    justify-content: center;
-    padding: 10px;
 }
 
 h1,
@@ -41,12 +37,37 @@ h1 + h2 {
 }
 
 header ul {
+    padding-left: 0;
+    padding-top: 0.25em;
+    margin-bottom: 0;
     background-color: rgba(0, 204, 147, 0.53);
+}
+
+header li {
+    list-style: none;
+    display: inline-block;
+    font-family: "Special Elite", cursive;
+    border-bottom: 3px solid transparent;
+    margin: 0 1em;
+}
+
+header li:hover {
+    border-bottom-color: currentColor;
 }
 
 header a {
     text-decoration: none;
     text-shadow: 1px 1px black;
+}
+
+header::selection,
+header ::selection,
+footer::selection,
+footer ::selection,
+#tags::selection,
+#tags ::selection {
+    color: white;
+    background-color: hotpink;
 }
 
 a:link {
@@ -109,7 +130,7 @@ main {
     margin-bottom: 1em;
 }
 
-#ultimas-postagens .post .time {
+#ultimas-postagens .post time {
     background-color: white;
     color: #333;
     border: 1px solid black;
@@ -123,6 +144,14 @@ main {
     font-size: 16px;
     line-height: 22px;
     display: inline-block;
+}
+
+.novidade::before {
+    content: "Novidade!";
+    color: white;
+    background-color: forestgreen;
+    padding: 0.25em;
+    border-radius: 0.25em;
 }
 
 #tags {
@@ -242,18 +271,80 @@ footer .texto-rodape {
     box-shadow: none;
 }
 
-.post.novidade::before {
-    content: "Novidade!";
-    background-color: #0f9b0f;
-    padding: 3px 7px;
-    border-radius: 5px;
-    text-shadow: 1px 1px 1px black;
+#voltar-topo {
+    background-color: white;
+    border-radius: 20%;
+    border: 2px solid silver;
+    font-size: 35px;
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
 
-header *::selection,
-footer *::selection,
-#tags *::selection {
-    background-color: #0f9b0f;
-    color: white;
-    text-shadow: 1px 1px 1px black;
+.tag-1:hover,
+.tag-2:hover,
+.tag-3:hover {
+    cursor: pointer;
+}
+
+.tag-1:active,
+.tag-2:active,
+.tag-3:active {
+    position: relative;
+    top: -2px;
+    left: -2px;
+}
+
+.post {
+    position: relative;
+}
+
+#posts-principais .post h2 {
+    position: absolute;
+    top: 0px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+}
+
+#posts-principais .post:hover h2 {
+    opacity: 1;
+    transition: 0.5s;
+}
+
+#voltar-topo {
+    position: absolute;
+    right: 15px;
+    font-size: medium;
+    padding: 10px;
+}
+
+#boo-1 {
+    top: 12%;
+    left: 80%;
+}
+
+#boo-2 {
+    top: 60%;
+    left: 12%;
+}
+
+#boo-3 {
+    top: 90%;
+    left: 60%;
+}
+
+.boo {
+    position: absolute;
+    opacity: 0.5;
+    width: 40px;
+    z-index: 1;
+}
+
+#tags {
+    position: sticky;
+    top: 0;
 }
